@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -146,6 +146,9 @@
         color: white;
         font-size: calc(1vw + 1vh + 0.5vmin);
     }
+    #spanX,#spanO{
+        font-size: calc(1.2vw + 1.2vh + 0.6vmin);
+    }
 </style>
 <body>
     <div class="container">
@@ -158,8 +161,8 @@
             <div id="b7" data-value="7"></div><div id="b8" data-value="8"></div><div id="b9" data-value="9"></div>
         </div>
         <div id="score">
-            <div>Score de ✕ : <span id="scoreX"></span></div>
-            <div>Score de ◯ : <span id="scoreO"></span></div> 
+            <div><span id="spanX">✕</span><span id="scoreX"></span></div>
+            <div><span id="spanO">◯</span><span id="scoreO"></span></div> 
         </div>
         <footer>@VidorsDesenvolvimentos</footer>
 
@@ -232,6 +235,16 @@
                 if ((winner == '✕') ? scoreX++ : scoreO++);
                 document.getElementById('scoreO').innerText = scoreO
                 document.getElementById('scoreX').innerText = scoreX
+                if (scoreX > scoreO){
+                    document.getElementById('scoreX').style.color = '#80ff00'
+                    document.getElementById('scoreO').style.color = '#ff0000'
+                } else if (scoreX < scoreO){
+                    document.getElementById('scoreX').style.color = '#ff0000'
+                    document.getElementById('scoreO').style.color = '#80ff00'
+                } else {
+                    document.getElementById('scoreX').style.color = '#ffff00'
+                    document.getElementById('scoreO').style.color = '#ffff00'
+                }
                 gameOver = true
             }
             else if (playerTurn == '✕'){
@@ -239,9 +252,7 @@
             } else if (playerTurn == '◯'){
                 playerTurn = '✕'
             } 
-        } else {console.log('not possible')}
+        } else {console.log('Not possible')}
     }
-
-    
 </script>
 </html>
