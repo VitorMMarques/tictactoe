@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');</style>
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: 'Poppins';
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+    }
+    body{
+        background-color:#121212;
+        color: #4e1287;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    header{
+        margin: 0.5vh;
+        font-size: calc(2.5vw + 2.5vh + 1.75vmin);
+        border: 0.1vh solid #672c9f;
+        background-color: #0b021431;
+        width: calc((6vw + 6vh + 3vmin)*3);
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: glow 2.5s infinite !important;
+    }
+    #screen{
+        background-color: #0b021431;
+        border: 0.1vh solid #672c9f;
+        width: calc((6vw + 6vh + 3vmin)*3);
+        height: calc((6vw + 6vh + 3vmin)*3);
+        display: grid;
+        justify-content: space-evenly;
+        align-items: center;
+        /* gap: calc((0.5vw + 0.5vh + 0.25vmin)); */
+        grid-template-columns: auto auto auto;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+    #screen div{
+        border: 0.1vh solid #8939d3;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        animation: buttonUnhover 0.5s forwards;
+        pointer-events: all;
+        font-size: calc(4vw + 4vh + 2vmin);
+        width: calc(5vw + 5vh + 2.5vmin);
+        height: calc(5vw + 5vh + 2.5vmin);
+        text-shadow: 0vh 0vh 2vh #672c9f;
+        color: #672c9f;
+    }
+    .winnerGlow{
+        animation: glow 0.5s infinite !important;
+    }
+    #screen div:hover{
+        animation: buttonHover 0.5s forwards;
+    }
+    @keyframes glow{
+        0%{}
+        50%{text-shadow: 0px 0px 21px #912cf1;
+            color:#672c9f}
+        100%{}
+    }
+    @keyframes buttonHover{
+        from{}
+        to{background-color:#2b2b2b;}
+    }
+    @keyframes buttonUnhover{
+        from{background-color:#2b2b2b;}
+        to{background-color:#121212}
+    }
+    footer{
+        width: calc((6vw + 6vh + 3vmin)*3);
+        height: 5vh;
+        font-size: calc(1vw + 1vh + 0.5vmin);
+        margin-top: 0.5vh;
+        border: 0.1vh solid #672c9f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: glow 2.5s infinite !important;
+        background-color: #0b021431;
+    }
+    dialog{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: calc(8vw + 8vh + 4vmin);
+        height: calc(4vw + 4vh + 2vmin);
+        background-color: #121212;
+        color: white;
+        /* display: flex; */
+        border: solid #672c9f 0.1vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    dialog div{
+        font-size: calc(1vw + 1vh + 0.5vmin);
+    }
+    dialog button{
+        background-color: #672c9f;
+        color: white;
+        padding: 3% 5%;
+        border: none;
+        box-shadow: 0.1vh 0.5vh #43166e;
+    }
+    dialog button:active{
+        background-color: #43166e;
+        box-shadow: 0.1vh 0.3vh #240a3d;
+        transform: translateY(0.2vh);
+    }
+    #score{
+        display: flex;
+        flex-direction: row;
+        width: calc((6vw + 6vh + 3vmin)*3);
+        height: 5vh;
+    }
+    #score div{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 50%;
+        background-color: #0b021431;
+        border: solid #672c9f 0.1vh;
+    }
+    #score span{
+        color: white;
+        font-size: calc(1vw + 1vh + 0.5vmin);
+    }
+</style>
+<body>
+    <div class="container">
+
+        <header class="title">Tic-Tac-Toe</header>
+
+        <div id="screen">
+            <div id="b1" data-value="1"></div><div id="b2" data-value="2"></div><div id="b3" data-value="3"></div>
+            <div id="b4" data-value="4"></div><div id="b5" data-value="5"></div><div id="b6" data-value="6"></div>
+            <div id="b7" data-value="7"></div><div id="b8" data-value="8"></div><div id="b9" data-value="9"></div>
+        </div>
+        <div id="score">
+            <div>Score de ✕ : <span id="scoreX"></span></div>
+            <div>Score de ◯ : <span id="scoreO"></span></div> 
+        </div>
+        <footer>@VidorsDesenvolvimentos</footer>
+
+        <dialog>
+            <div id="textoPopup"></div>
+            <button onclick="restart()">Reiniciar</button>
+        </dialog>
+
+    </div>
+</body>
+<script>
+
+    function restart() {
+        gameOver = false
+        hArray =['','','',
+                 '','','',
+                 '','','']
+        playerTurn = '✕'
+        popup[0].style.display = 'none'
+        for (let i = 0; i < screen.childElementCount; i++) {
+            screen.children[i].innerHTML = ''
+        }
+    }
+    scoreO = 0
+    scoreX = 0
+    document.getElementById('scoreO').innerText = scoreO
+    document.getElementById('scoreX').innerText = scoreX
+    gameOver = false
+    hArray =['','','',
+             '','','',
+             '','','']
+
+    const screen = document.getElementById('screen')
+    const popup = document.getElementsByTagName('dialog')
+    const textoPopup = document.getElementById('textoPopup')
+
+    playerTurn = '✕'
+
+    screen.onclick = e => {
+        if (e.target.innerText == '' && gameOver == false){
+            console.log(Number(e.target.getAttribute('data-value')));
+            hArray[Number(e.target.getAttribute('data-value'))-1] = playerTurn
+            e.target.innerText = playerTurn
+            console.log(playerTurn)
+            if (hArray[0] != '' && hArray[1] != '' && hArray[2] != '' &&
+                hArray[3] != '' && hArray[4] != '' && hArray[5] != '' &&
+                hArray[6] != '' && hArray[7] != '' && hArray[8] != ''
+            ) {
+                console.log('Empate')
+                popup[0].style.display = 'flex'
+                textoPopup.innerText = 'Empate'
+            }
+            if
+               (hArray[0] != '' && hArray[0] == hArray[1] && hArray[1] == hArray[2] ||
+                hArray[3] != '' && hArray[3] == hArray[4] && hArray[4] == hArray[5] ||
+                hArray[6] != '' && hArray[6] == hArray[7] && hArray[7] == hArray[8] ||
+                hArray[0] != '' && hArray[0] == hArray[3] && hArray[3] == hArray[6] ||
+                hArray[1] != '' && hArray[1] == hArray[4] && hArray[4] == hArray[7] ||
+                hArray[2] != '' && hArray[2] == hArray[5] && hArray[5] == hArray[8] ||
+                hArray[0] != '' && hArray[0] == hArray[4] && hArray[4] == hArray[8] ||
+                hArray[2] != '' && hArray[2] == hArray[4] && hArray[4] == hArray[6] ){
+                if (playerTurn == '✕'){
+                    winner = '✕'
+                } else {
+                    winner = '◯'
+                }
+                console.log(`Vitória de ${winner}`)
+                popup[0].style.display = 'flex'
+                textoPopup.innerText = `Vitória de ${winner}`
+                if ((winner == '✕') ? scoreX++ : scoreO++);
+                document.getElementById('scoreO').innerText = scoreO
+                document.getElementById('scoreX').innerText = scoreX
+                gameOver = true
+            }
+            else if (playerTurn == '✕'){
+                playerTurn = '◯'
+            } else if (playerTurn == '◯'){
+                playerTurn = '✕'
+            } 
+        } else {console.log('not possible')}
+    }
+
+    
+</script>
+</html>
